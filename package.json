@@ -1,0 +1,25 @@
+{
+  "name": "index.html",
+  "version": "1.0.2",
+  "main": "main.js",
+  "author": "Donor Darah Team",
+  "description": "Formulir Donor Darah",
+  "build": {
+    "appId": "com.Donor Darah",
+    "productName": "index.html",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    }
+  },
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.6.4"
+  }
+}
