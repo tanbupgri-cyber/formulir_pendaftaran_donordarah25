@@ -281,8 +281,8 @@
         async function loadDataPeserta() {
             const { data, error } = await supabaseClient
                 .from(TABLE_NAME)
-                .select('*')
-                .order('created_at', { ascending: false }); 
+                .select('*'); // <--- CUKUP SAMPAI DI SINI
+        // ...
 
             // Baris 288 di index.html (Kode Baru)
 if (error) {
@@ -571,6 +571,7 @@ if (error) {
 
 </body>
 </html>
+
 
 
 
