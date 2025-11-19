@@ -193,7 +193,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div id="download" class="section-content">
             <h3 class="mb-4 border-start border-5 border-danger ps-3">Rekap Data Peserta</h3>
             <div class="alert alert-info">
@@ -224,10 +224,80 @@
         </div>
 
     </div>
+<h2>Data Rekap</h2>
 
+  <!-- TEMPATKAN DIV REKAP DI SINI -->
+  <div id="rekap"></div>
+
+  <script>
+    const supabase = supabase.createClient(
+      "https://YOUR_PROJECT_URL.supabase.co",
+      "YOUR_ANON_PUBLIC_KEY"
+    );
+
+    async function getRekap() {
+      const { data, error } = await supabase
+        .from("pendaftaran")
+        .select("*")
+        .order("id", { ascending: false });
+
+      if (error) {
+        console.log(error);
+        return;
+      }
+
+      let html = "<table border='1'><tr><th>ID</th><th>Nama</th><th>Sekolah</th><th>Gol</th></tr>";
+      data.forEach(d => {
+        html += `<tr>
+          <td>${d.id}</td>
+          <td>${d.nama}</td>
+          <td>${d.sekolah}</td>
+          <td>${d.gol_darah}</td>
+        </tr>`;
+      });
+      html += "</table>";
+
+      document.getElementById("rekap").innerHTML = html;
+    }
+
+    getRekap();
+  </script>
+
+</body>
+</html>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+    const supabase = supabase.createClient(
+        
+    import { createClient } from '@supabase/supabase-js'
+    const supabaseUrl = 'https://yuaqnktrpzyyszoewdbl.supabase.co'
+    const supabaseKey = process.env.SUPABASE_KEY
+    const supabase = createClient(supabaseUrl, supabaseKey)
+        );
+    </script>
+    <script>
+    document.getElementById("formDonor").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const nama = document.getElementById("nama").value;
+    const sekolah = document.getElementById("sekolah").value;
+    const gol = document.getElementById("gol").value;
+
+    const { data, error } = await supabase
+        .from("pendaftaran")
+        .insert([{ nama, sekolah, gol_darah: gol }]);
+
+    if (error) {
+        alert("Gagal menyimpan: " + error.message);
+    } else {
+        alert("Berhasil daftar!");
+    }
+    });
+    </script>
+
 
     <script>
 
