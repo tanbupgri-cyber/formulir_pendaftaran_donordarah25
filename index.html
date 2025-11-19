@@ -226,40 +226,6 @@
     </div>
 <h2>Data Rekap</h2>
 
-  <!-- TEMPATKAN DIV REKAP DI SINI -->
-  <div id="rekap"></div>
-
-  <script>
-    const supabase = supabase.createClient(
-      "https://YOUR_PROJECT_URL.supabase.co",
-      "YOUR_ANON_PUBLIC_KEY"
-    );
-
-    async function getRekap() {
-      const { data, error } = await supabase
-        .from("pendaftaran")
-        .select("*")
-        .order("id", { ascending: false });
-
-      if (error) {
-        console.log(error);
-        return;
-      }
-
-      let html = "<table border='1'><tr><th>ID</th><th>Nama</th><th>Sekolah</th><th>Gol</th></tr>";
-      data.forEach(d => {
-        html += `<tr>
-          <td>${d.id}</td>
-          <td>${d.nama}</td>
-          <td>${d.sekolah}</td>
-          <td>${d.gol_darah}</td>
-        </tr>`;
-      });
-      html += "</table>";
-
-      document.getElementById("rekap").innerHTML = html;
-    }
-
     getRekap();
   </script>
 
