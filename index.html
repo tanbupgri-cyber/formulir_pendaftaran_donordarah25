@@ -270,14 +270,69 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-    const supabase = supabase.createClient(
-        
-    import { createClient } from '@supabase/supabase-js'
-    const supabaseUrl = 'https://yuaqnktrpzyyszoewdbl.supabase.co'
-    const supabaseKey = process.env.SUPABASE_KEY
-    const supabase = createClient(supabaseUrl, supabaseKey)
-        );
-    </script>
+     // Inisialisasi Supabase
+  const supabaseUrl = 'https://yuaqnktrpzyyszoewdbl.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl1YXFua3RycHp5eXN6b2V3ZGJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM1NTUzMTYsImV4cCI6MjA3OTEzMTMxNn0.chjhe4b8yacLSLLJ8v9fnXTjcMHU0mFP1VZFaP5CPcQ';
+
+  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+  // =============================
+  //  FUNGSI SIMPAN DATA FORM
+  // =============================
+  async function submitForm(event) {
+    event.preventDefault();
+
+    const formData = {
+      nama: document.getElementById('nama').value,
+      instansi: document.getElementById('instansi').value,
+      nohp: document.getElementById('nohp').value,
+      golongan: document.getElementById('golongan').value,
+      rhesus: document.getElementById('rhesus').value
+    };
+
+    const { data, error } = await supabase
+      .from('peserta_donor')
+      .insert([formData]);
+
+    if (error) {
+      alert("Gagal menyimpan data!");
+      console.error(error);
+    } else {
+      alert("Data berhasil disimpan!");
+      document.getElementById('form-daftar').reset();
+    }
+  }
+
+  // =============================
+  //  FUNGSI MENAMPILKAN REKAP
+  // =============================
+  async function loadRekap() {
+    const { data, error } = await supabase
+      .from('peserta_donor')
+      .select('*')
+      .order('id', { ascending: false });
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    let tbody = document.getElementById("rekap-body");
+    tbody.innerHTML = "";
+
+    data.forEach((row, index) => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${index + 1}</td>
+          <td>${row.nama}</td>
+          <td>${row.instansi}</td>
+          <td>${row.nohp}</td>
+          <td>${row.golongan}${row.rhesus}</td>
+        </tr>
+      `;
+    });
+  }
+</script>
     <script>
     document.getElementById("formDonor").addEventListener("submit", async function(e){
     e.preventDefault();
