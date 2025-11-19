@@ -284,17 +284,24 @@
                 .select('*')
                 .order('created_at', { ascending: false }); 
 
-            if (error) {
-                console.error("Gagal memuat data dari Supabase:", error.message);
-                // Tampilkan data dummy jika gagal koneksi
-                const dummyData = [{
-                    nama_lengkap: "Gagal Koneksi", unit_kerja: "SDN Test", golongan_darah: "A", cabang_pgri: "Batulicin", nomor_hp: "0", pernah_donor: "TIDAK", tanggal_terakhir_donor: null,
-                }];
-                dataPesertaGlobal = dummyData;
-                alert("Gagal koneksi ke Supabase. Data dummy ditampilkan. Cek koneksi Supabase di console.");
-            } else {
-                 dataPesertaGlobal = data;
-            }
+            // Baris 288 di index.html (Kode Baru)
+if (error) {
+    console.error("Gagal memuat data dari Supabase:", error.message);
+    
+    // HAPUS DATA DUMMY: Set data global menjadi array kosong
+    dataPesertaGlobal = []; // 👈 PERUBAHAN UTAMA DI SINI
+
+    alert("Gagal koneksi ke Supabase. Dashboard dan Tabel Rekap dikosongkan. Harap cek error di console!");
+    
+    // PENTING: Kita tetap memanggil updateDashboard/updateTabelRekap agar layar ter-refresh dengan data kosong
+    updateDashboard(dataPesertaGlobal);
+    updateTabelRekap(dataPesertaGlobal);
+    return; // Keluar dari fungsi jika terjadi error
+} else {
+    dataPesertaGlobal = data;
+}
+
+// ... kode setelahnya (updateDashboard, updateTabelRekap)
             
             updateDashboard(dataPesertaGlobal);
             updateTabelRekap(dataPesertaGlobal);
@@ -564,6 +571,7 @@
 
 </body>
 </html>
+
 
 
 
