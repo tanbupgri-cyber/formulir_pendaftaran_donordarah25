@@ -438,14 +438,16 @@ if (error) {
             };
             
             // 2. INSERT KE SUPABASE
-            const { error: insertError } = await supabaseClient
-                .from(TABLE_NAME)
-                .insert([insertData]);
+            .from('formulir_pendaftaran_donordarah25')
+            .insert([{ nama: 'Budi', usia: 25 }]);
 
-            if (insertError) {
-                alert("❌ Gagal menyimpan data ke Supabase! Harap cek konfigurasi dan koneksi Anda.");
-                console.error("Supabase Insert Error:", insertError);
-                return;
+            // Baris 288 di index.html (Kode Baru)
+        if (error) {
+            console.error('Supabase Insert Error:', error);           // tampilkan object error
+            console.log('error.message:', error.message);
+            console.log('error.details:', error.details);
+            console.log('error.hint:', error.hint);
+            console.log('status:', error.status);                    // bila ada
             }
 
             // 3. PROSES FOTO & GENERATE PDF
@@ -571,6 +573,7 @@ if (error) {
 
 </body>
 </html>
+
 
 
 
