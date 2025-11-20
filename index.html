@@ -58,10 +58,10 @@
                         <a class="nav-link active" href="#" onclick="switchMenu('beranda', this)">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="switchMenu('formulir', this)">Isi_Formulir_Pendaftaran</a>
+                        <a class="nav-link" href="#" onclick="switchMenu('formulir', this)">ISI FORMULIR PENDAFTARAN</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="switchMenu('download', this)">Download_Rekap_Data</a>
+                        <a class="nav-link" href="#" onclick="switchMenu('download', this)">REKAP PESERTA</a>
                     </li>
                 </ul>
             </div>
@@ -280,7 +280,7 @@
 
         async function loadDataPeserta() {
             const { data, error } = await supabaseClient
-                .from(formulir pendaftaran donor darah)
+                .from(formulir_pendaftaran_donor_darah)
                 .select('*'); // <--- CUKUP SAMPAI DI SINI
         // ...
 
@@ -439,7 +439,7 @@ if (error) {
             
             // 2. INSERT KE SUPABASE
             const { error: insertError } = await supabaseClient
-                .from(formulir pendaftaran donor darah)
+                .from(formulir_pendaftaran_donor_darah)
                 .insert([insertData]);
 
             if (insertError) {
@@ -571,6 +571,7 @@ if (error) {
 
 </body>
 </html>
+
 
 
 
