@@ -280,7 +280,7 @@
 
         async function loadDataPeserta() {
             const { data, error } = await supabaseClient
-                .from(formulir pendaftaran donor darah)
+                .from(TABLE_NAME)
                 .select('*'); // <--- CUKUP SAMPAI DI SINI
         // ...
 
@@ -439,7 +439,7 @@ if (error) {
             
             // 2. INSERT KE SUPABASE
             const { error: insertError } = await supabaseClient
-                .from(formulir pendaftaran donor darah)
+                .from(TABLE_NAME)
                 .insert([insertData]);
 
             if (insertError) {
@@ -571,7 +571,6 @@ if (error) {
 
 </body>
 </html>
-
 
 
 
