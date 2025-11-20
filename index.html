@@ -232,21 +232,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-
     <script>
-        // ===============================================
-        // *** LANGKAH 1: KONFIGURASI SUPABASE ANDA ***
-        // GANTI nilai di bawah ini dengan URL dan KUNCI API Anon Anda dari proyek Supabase.
-        // ===============================================
         const SUPABASE_URL = 'https://yuaqnktrpzyyszoewdbl.supabase.co'; // 👈 GANTI INI!
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl1YXFua3RycHp5eXN6b2V3ZGJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM1NTUzMTYsImV4cCI6MjA3OTEzMTMxNn0.chjhe4b8yacLSLLJ8v9fnXTjcMHU0mFP1VZFaP5CPcQ'; // 👈 GANTI INI!
-        const TABLE_NAME = 'formulir pendaftaran donor darah'; // Pastikan ini sesuai dengan nama tabel Anda di Supabase
-
-        // Inisialisasi Klien Supabase
-        const { createClient } = supabase;
-        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        // ===============================================
-
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // === LOGIKA NAVIGASI & FORM ===
         function switchMenu(menuId, element) {
@@ -573,6 +562,7 @@ if (error) {
 
 </body>
 </html>
+
 
 
 
